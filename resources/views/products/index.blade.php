@@ -3,13 +3,20 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
+        <div class="col-lg-12 margin-tb mb-3">
             <div class="pull-left">
-                <h2>Products</h2>
+                <h2>Produtos</h2>
             </div>
+
+            <div class="input-group col-6 my-3" >
+                <input  type="search" id="searchProduct" class="form-control rounded" placeholder="Buscar Produto"
+                aria-label="Buscar-Produto"
+                  aria-describedby="search-addon" onkeyup="buscar(this)" />
+                <button type="button" class="btn btn-outline-primary disabled">Buscar</button>
+              </div>
             <div class="pull-right">
                 @can('product-create')
-                <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
+                <a class="btn btn-success" href="{{ route('admin.products.create') }}"> Create New Product</a>
                 @endcan
             </div>
         </div>
@@ -32,14 +39,14 @@
         </tr>
 	    @foreach ($products as $product)
 	    <tr>
-	        <td>{{ ++$i }}</td>
+	        <td>{{ $product->id}}</td>
 	        <td>{{ $product->name }}</td>
 	        <td>{{ $product->detail }}</td>
 	        <td>
-                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
+                <form action="{{ route('admin.products.destroy',$product->id) }}" method="POST">
+
                     @can('product-edit')
-                    <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.products.edit',$product->id) }}">Edit</a>
                     @endcan
 
 
@@ -54,8 +61,48 @@
 	    @endforeach
     </table>
 
+    <div>
+        {!! $products->links() !!}
+    </div>
+    <meta name="csrf-token" content="@csrf">
 
-    {!! $products->links() !!}
+@endsection
 
+@section('js')
+
+    <script>
+       async function buscar(search){
+
+        searchTerm = search.value;
+
+        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        console.log(token)
+
+        let resultado;
+
+        resultado = await fetch('{{route("api.products")}}',{
+            headers: {
+                "Content-Type": "application/json",
+
+            "X-CSRF-Token": token
+            },
+            method: 'post',
+            credentials: "same-origin",
+            body:  JSON.stringify({
+                    search: searchTerm,
+                })
+        })
+            .then(function(response){
+                response.json().then(function(response){
+                    console.log(response)
+                })
+            })
+            .catch(function(error){
+                console.log(error)
+            })
+        }
+
+    </script>
 
 @endsection

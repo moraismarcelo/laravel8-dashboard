@@ -8,22 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Product extends Model
+class Category extends Model
 {
     use HasFactory, SoftDeletes, HasSlug;
 
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
-        'detail',
-        'price',
-        'active',
-        'discount',
-
+        'active'
     ];
 
     public function getSlugOptions() : SlugOptions

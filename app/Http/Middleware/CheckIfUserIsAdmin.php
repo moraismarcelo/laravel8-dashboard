@@ -16,10 +16,10 @@ class CheckIfUserIsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        // if(auth()->user()->id !== 1)
-        // {
-        //     abort(403);
-        // }
+        if(auth()->user()->id !== 1)
+        {
+            abort(403);
+        }
 
         return $next($request);
     }

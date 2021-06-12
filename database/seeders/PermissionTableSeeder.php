@@ -28,6 +28,11 @@ class PermissionTableSeeder extends Seeder
            'admin.user.update',
            'admin.user.destroy',
 
+           'admin.product.index',
+           'admin.product.create',
+           'admin.product.update',
+           'admin.product.destroy',
+
         ];
 
         foreach ($permissions as $permission) {

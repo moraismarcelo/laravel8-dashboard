@@ -243,7 +243,8 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Buscar Menu',
+            'id' => 'mySearchMenu'
         ],
         // [
         //     'text' => 'blog',
@@ -257,17 +258,58 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+
+        ['header' => 'Painel Loja'],
+
+        [
+            'text'    => 'Gerencia da Loja',
+            'icon'    => 'fas fa-fw fa-store',
+            'submenu' => [
+                [
+                    'text' => 'Produtos',
+                    'route' => 'admin.products.index',
+                    'can' => 'admin.product.index',
+                    // 'active' => ['admin/users*'],
+                ],
+
+                [
+                    'text' => 'Categorias',
+                    'url' => '#',
+                    // 'can' => 'role-list',
+                    // 'route' => 'admin.roles.index',
+                    // 'active' => ['admin/roles*'],
+                ],
+                // [
+                //     'text'    => 'level_one',
+                //     'url'     => '#',
+                //     'submenu' => [
+                //         [
+                //             'text' => 'level_two',
+                //             'url'  => '#',
+                //         ],
+                //         [
+                //             'text'    => 'level_two',
+                //             'url'     => '#',
+                //             'submenu' => [
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url'  => '#',
+                //                 ],
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url'  => '#',
+                //                 ],
+                //             ],
+                //         ],
+                //     ],
+                // ],
+
+            ],
+        ],
+
+
         ['header' => 'Painel Administrativo'],
-        // [
-        //     'text' => 'profile',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-user',
-        // ],
-        // [
-        //     'text' => 'change_password',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-lock',
-        // ],
+
         [
             'text'    => 'Gerencia de usuários',
             'icon'    => 'fas fa-fw fa-lock',
@@ -275,14 +317,15 @@ return [
                 [
                     'text' => 'Usuários',
                     'route' => 'admin.users.index',
-                    'can' => 'admin.user.index'
-
+                    'can' => 'admin.user.index',
+                    'active' => ['admin/users*'],
                 ],
 
                 [
                     'text' => 'Permissões',
                     'can' => 'role-list',
                     'route' => 'admin.roles.index',
+                    'active' => ['admin/roles*'],
                 ],
                 // [
                 //     'text'    => 'level_one',

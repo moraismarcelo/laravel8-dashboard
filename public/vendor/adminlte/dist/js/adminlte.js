@@ -2240,6 +2240,7 @@
         href: link,
         class: 'list-group-item'
       });
+
       var searchTitleElement = $__default['default']('<div/>', {
         class: 'search-title'
       }).html(name);
